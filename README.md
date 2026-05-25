@@ -1,2 +1,2 @@
 # Monitoreo-Calderas
-Aplicación Proterm
+Aplicación Proterm De Diagnóstico Energético
