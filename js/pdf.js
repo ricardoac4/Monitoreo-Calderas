@@ -223,13 +223,18 @@ function generarPDF() {
   doc.setFillColor(...BLUE); doc.rect(0, 0, W, 55, 'F');
   doc.setFillColor(...ORANGE); doc.rect(0, 55, W, 3, 'F');
 
-  // Logo llama
-  doc.setFillColor(...ORANGE); doc.roundedRect(M, 10, 9, 12, 2, 2, 'F');
-  doc.setFillColor(...RED_P);  doc.roundedRect(M+2, 13, 5, 8, 1, 1, 'F');
-  doc.setFontSize(17); doc.setFont('helvetica','bold'); doc.setTextColor(...WHITE);
-  doc.text('Proterm', M+13, 19);
-  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(180, 215, 240);
-  doc.text('Ambiente y Energía', M+13, 24);
+  // Logo real Proterm (imagen PNG embebida)
+  // El logo tiene fondo negro, lo ponemos sobre un rect blanco redondeado
+  doc.setFillColor(255,255,255); doc.roundedRect(M, 8, 52, 26, 3, 3, 'F');
+  if (window.LOGO_PDF_B64) {
+    doc.addImage(window.LOGO_PDF_B64, 'PNG', M+1, 9, 50, 24);
+  } else {
+    // Fallback texto si no carga la imagen
+    doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(...BLUE);
+    doc.text('Proterm', M+4, 20);
+    doc.setFontSize(7); doc.setFont('helvetica','normal');
+    doc.text('Ambiente y Energía', M+4, 26);
+  }
 
   // Título derecha
   doc.setFontSize(7.5); doc.setTextColor(180, 215, 240);
