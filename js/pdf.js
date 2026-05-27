@@ -594,7 +594,7 @@ function generarPDF() {
 
   // ── Certificado y firmas ──
   secTitle('Certificado y firmas');
-  alertBox('El suscrito certifica que la inspección fue realizada conforme al Reglamento de Instalaciones Térmicas en los Edificios (RITCH 2007). Los resultados consignados reflejan las condiciones observadas en terreno a la fecha de visita.', 'ok');
+  alertBox('El suscrito certifica que la inspección fue realizada bajo estándares Proterm.', 'ok');
 
   y += 6;
   checkY(32);
