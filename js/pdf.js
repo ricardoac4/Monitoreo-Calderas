@@ -4,7 +4,7 @@
 // GENERACIÓN DE PDF
 // ─────────────────────────────────────────────
 function generarPDF() {
-  const { jsPDF } = window.jspdf;
+  const { jsPDF } = window.jspdf; 
   const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
   const W = 210; const M = 16; const TW = W - M*2;
   let y = 0; let pageNum = 1;
