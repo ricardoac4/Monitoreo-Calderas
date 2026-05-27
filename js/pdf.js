@@ -95,7 +95,7 @@ function generarPDF() {
   function footer() {
     doc.setFillColor(...BLUE); doc.rect(0, 285, W, 12, 'F');
     doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(...WHITE);
-    doc.text(`Proterm Ambiente y Energía  ·  Auditoría Térmica RITCH 2007  ·  ${nombre}`, M, 291);
+    doc.text(`Proterm S.A.  ·  Diagnóstico Energético Térmico  ·  ${nombre}`, M, 291);
     doc.text(`Pág. ${pageNum}`, W-M, 291, { align:'right' });
   }
 
@@ -238,7 +238,7 @@ function generarPDF() {
 
   // Título derecha
   doc.setFontSize(7.5); doc.setTextColor(180, 215, 240);
-  doc.text('INFORME DE AUDITORÍA TÉRMICA  ·  RITCH 2007', W-M, 18, { align:'right' });
+  doc.text('INFORME DE DIAGNÓSTICO ENERGÉTICO TÉRMICO', W-M, 18, { align:'right' });
   doc.setFontSize(15); doc.setFont('helvetica','bold'); doc.setTextColor(...WHITE);
   doc.text(nombre, M, 38);
   doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(200, 225, 245);
@@ -291,7 +291,7 @@ function generarPDF() {
   const kpis = [
     { val:urgentes,  lbl:'Urgentes',        color: urgentes>0?[230,51,41]:BLUE },
     { val:medias,    lbl:'Defic. medias',   color: medias>0?ORANGE:BLUE },
-    { val:okCump,    lbl:'Conformes RITCH', color: BLUE },
+    { val:okCump,    lbl:'Ítems conformes', color: BLUE },
     { val:rend!=null?rend.toFixed(1)+'%':'N/D', lbl:'Rendimiento η',color:rend==null?GRAY:rend>=91?BLUE:rend>=85?ORANGE:[230,51,41] },
     { val:ahorro.pctTotal+'%', lbl:'Ahorro potencial', color:ahorro.pctTotal>0?BLUE:GRAY },
     { val:ahorro.totalAhorro>0?'$'+Math.round(ahorro.totalPesos/1000)+'K':'—', lbl:'Ahorro CLP/año', color:BLUE },
@@ -547,12 +547,12 @@ function generarPDF() {
   });
 
   y += 4;
-  secTitle('Checklist de cumplimiento RITCH');
+  secTitle('Checklist de verificación normativa');
 
   // Tabla checklist
   const chW = [TW-28, 20, 8];
   checkY(9);
-  tableRow([{text:'Ítem evaluado'},{text:'Ref. RITCH',align:'center'},{text:'',align:'center'}], chW, y, true, true);
+  tableRow([{text:'Ítem evaluado'},{text:'Referencia',align:'center'},{text:'',align:'center'}], chW, y, true, true);
   y += 8;
 
   checkItems.forEach((item, ri) => {
@@ -594,12 +594,12 @@ function generarPDF() {
 
   // ── Certificado y firmas ──
   secTitle('Certificado y firmas');
-  alertBox('El suscrito certifica que la inspección fue realizada bajo estándares Proterm.', 'ok');
+  alertBox('El suscrito certifica que el diagnóstico energético de las instalaciones térmicas del inmueble fue realizado por personal de Proterm S.A. Los resultados consignados reflejan fielmente las condiciones observadas en terreno a la fecha de visita.', 'ok');
 
   y += 6;
   checkY(32);
   // Dos zonas de firma
-  [[M, inspector, 'Inspector responsable', 'Auditor térmico RITCH'],
+  [[M, inspector, 'Técnico Proterm S.A.', 'Diagnóstico Energético'],
    [M + TW/2 + 4, cliente, 'Recibido conforme', 'Fecha: ___/___/______']
   ].forEach(([sx, name, role, sub]) => {
     doc.setDrawColor(...LGRAY); doc.setLineWidth(0.4);
@@ -613,7 +613,7 @@ function generarPDF() {
   y += 40;
 
   doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(...GRAY);
-  const disc = 'Este informe no reemplaza el Certificado de Instalación formal requerido por el RITCH (Art. 10°). Las observaciones urgentes deben subsanarse antes de la próxima temporada de calefacción.';
+  const disc = 'Este informe ha sido elaborado por Proterm S.A. con fines de diagnóstico energético. Las observaciones urgentes de seguridad deben subsanarse a la brevedad. Para consultas: Proterm S.A. — Ambiente y Energía.';
   const discL = doc.splitTextToSize(disc, TW);
   checkY(discL.length * 4.5 + 2);
   doc.text(discL, M, y);
